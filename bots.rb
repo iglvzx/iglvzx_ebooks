@@ -22,6 +22,7 @@ class CloneBot < Ebooks::Bot
     self.blacklist = %w(kylelehk friedrichsays Sudieofna tnietzschequote NerdsOnPeriod FSR BafflingQuotes Obey_Nxme raphisblackbot)
     self.delay_range = 1..6
     @userinfo = {}
+    @word_blacklist = %w(rape rapes raped raping rapist rapists)
   end
 
   def top100;
@@ -36,8 +37,22 @@ class CloneBot < Ebooks::Bot
     load_model!
 
     scheduler.cron '*/20 * * * *' do
-      # Each day at midnight, post a single tweet
-      tweet(model.make_statement)
+      # Every 20 minutes, post a single tweet
+      tweet_text = model.make_statement
+
+      count = 0
+      while @word_blacklist.any? { |word| tweet_text.downcase.include?(word) } && count < 5
+        log "Blacklisted word on attempt #{count}. Generating new tweet."
+        tweet_text = model.make_statement
+        count = count + 1
+      end
+
+      if count == 5
+        log 'Could not generate tweet without blacklisted words. Self-censoring...'
+        tweet_text = ':x'
+      end
+
+      tweet(tweet_text)
     end
   end
 
@@ -45,7 +60,21 @@ class CloneBot < Ebooks::Bot
 
     delay do
       load_model!
-      reply(dm, model.make_response(dm.text))
+      tweet_text = model.make_response(dm.text)
+
+      count = 0
+      while @word_blacklist.any? { |word| tweet_text.downcase.include?(word) } && count < 5
+        log "Blacklisted word on attempt #{count}. Generating new tweet."
+        tweet_text = model.make_response(dm.text)
+        count = count + 1
+      end
+
+      if count == 5
+        log 'Could not generate tweet without blacklisted words. Self-censoring...'
+        tweet_text = ':x'
+      end
+
+      reply(dm, tweet_text)
     end
 
   end
@@ -61,7 +90,21 @@ class CloneBot < Ebooks::Bot
 
       delay do
         load_model!
-        reply(tweet, model.make_response(meta(tweet).mentionless, meta(tweet).limit))
+        tweet_text = model.make_response(meta(tweet).mentionless, meta(tweet).limit)
+
+        count = 0
+        while @word_blacklist.any? { |word| tweet_text.downcase.include?(word) } && count < 5
+          log "Blacklisted word on attempt #{count}. Generating new tweet."
+          tweet_text = model.make_response(meta(tweet).mentionless, meta(tweet).limit)
+          count = count + 1
+        end
+
+        if count == 5
+          log 'Could not generate tweet without blacklisted words. Self-censoring...'
+          tweet_text = ':x'
+        end
+
+        reply(tweet, tweet_text)
       end
     end
 
