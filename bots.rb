@@ -63,8 +63,7 @@ class CloneBot < Ebooks::Bot
       end
 
       if count == 5
-        log 'Could not generate tweet without blacklisted words. Self-censoring...'
-        tweet_text = '😶' # face without mouth emoji
+        tweet_text = self_censored
       end
 
       tweet(tweet_text)
@@ -85,13 +84,17 @@ class CloneBot < Ebooks::Bot
       end
 
       if count == 5
-        log 'Could not generate tweet without blacklisted words. Self-censoring...'
-        tweet_text = '😶' # face without mouth emoji
+        tweet_text = self_censored
       end
 
       reply(dm, tweet_text)
     end
 
+  end
+
+  def self_censored
+    log 'Could not generate tweet without blacklisted words. Self-censoring...'
+    '😶' # face without mouth emoji
   end
 
   def on_mention(tweet)
@@ -117,8 +120,7 @@ class CloneBot < Ebooks::Bot
         end
 
         if count == 5
-          log 'Could not generate tweet without blacklisted words. Self-censoring...'
-          tweet_text = '😶' # face without mouth emoji
+          tweet_text = self_censored
         end
 
         reply(tweet, tweet_text)
