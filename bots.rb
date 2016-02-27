@@ -1,3 +1,4 @@
+# Encoding: UTF-8
 require 'twitter_ebooks'
 
 # Information about a particular Twitter user we know
@@ -19,10 +20,24 @@ class CloneBot < Ebooks::Bot
 
   def configure
     # Configuration for all CloneBots
-    self.blacklist = %w(kylelehk friedrichsays Sudieofna tnietzschequote NerdsOnPeriod FSR BafflingQuotes Obey_Nxme raphisblackbot)
+    self.blacklist = [
+        'kylelehk', 'friedrichsays', 'Sudieofna', 'tnietzschequote', 'NerdsOnPeriod', 'FSR', 'BafflingQuotes', 'Obey_Nxme', 'raphisblackbot'
+    ]
+
     self.delay_range = 1..6
     @userinfo = {}
-    @word_blacklist = %w(rape rapes raped raping rapist rapists)
+
+    @word_blacklist = [
+        'rape', 'rapes', 'raped', 'raping', 'rapist', 'rapists',
+        'pedo', 'pedos', 'pedophile', 'pedophiles', 'paedo', 'paedos', 'paedophile', 'paedophiles',
+        'child porn', 'child pornography', 'molest', 'molests'
+    ]
+
+    @reply_blacklist = [
+        'gamergate', 'stopgamergate',
+        'yiannopoulos', 'zoe quinn', 'brianna wu',
+        'dramatica'
+    ]
   end
 
   def top100;
@@ -49,7 +64,7 @@ class CloneBot < Ebooks::Bot
 
       if count == 5
         log 'Could not generate tweet without blacklisted words. Self-censoring...'
-        tweet_text = ':x'
+        tweet_text = '😶' # face without mouth emoji
       end
 
       tweet(tweet_text)
@@ -71,7 +86,7 @@ class CloneBot < Ebooks::Bot
 
       if count == 5
         log 'Could not generate tweet without blacklisted words. Self-censoring...'
-        tweet_text = ':x'
+        tweet_text = '😶' # face without mouth emoji
       end
 
       reply(dm, tweet_text)
@@ -92,8 +107,10 @@ class CloneBot < Ebooks::Bot
         load_model!
         tweet_text = model.make_response(meta(tweet).mentionless, meta(tweet).limit)
 
+        combined_blacklist = @word_blacklist + @reply_blacklist
+
         count = 0
-        while @word_blacklist.any? { |word| tweet_text.downcase.include?(word) } && count < 5
+        while combined_blacklist.any? { |word| tweet_text.downcase.include?(word) } && count < 5
           log "Blacklisted word on attempt #{count}. Generating new tweet."
           tweet_text = model.make_response(meta(tweet).mentionless, meta(tweet).limit)
           count = count + 1
@@ -101,7 +118,7 @@ class CloneBot < Ebooks::Bot
 
         if count == 5
           log 'Could not generate tweet without blacklisted words. Self-censoring...'
-          tweet_text = ':x'
+          tweet_text = '😶' # face without mouth emoji
         end
 
         reply(tweet, tweet_text)
