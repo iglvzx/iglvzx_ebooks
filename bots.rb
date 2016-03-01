@@ -1,5 +1,6 @@
 # Encoding: UTF-8
 require 'twitter_ebooks'
+require 'json'
 
 # Information about a particular Twitter user we know
 class UserInfo
@@ -206,11 +207,13 @@ class CloneBot < Ebooks::Bot
   end
 end
 
-CloneBot.new('iglvzx_ebooks') do |bot|
-  bot.consumer_key = ''
-  bot.consumer_secret = ''
-  bot.access_token = ''
-  bot.access_token_secret = ''
+keys_file = File.read('keys.json')
+keys = JSON.parse(keys_file)
 
+CloneBot.new('iglvzx_ebooks') do |bot|
+  bot.consumer_key = keys['consumer_key']
+  bot.consumer_secret = keys['consumer_secret']
+  bot.access_token = keys['access_token']
+  bot.access_token_secret = keys['access_token_secret']
   bot.original = 'iglvzx'
 end

@@ -2,3 +2,4 @@ corpus/
 /node_modules/
 /model/
 *.lock
+/keys.json
