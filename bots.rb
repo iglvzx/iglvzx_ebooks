@@ -37,7 +37,7 @@ class CloneBot < Ebooks::Bot
     @reply_blacklist = [
         'gamergate', 'stopgamergate', '8chan', 'terf', 'tfyc', 'the fine young capitalists',
         'yiannopoulos', 'zoe quinn', 'brianna wu', 'ethan ralph', 'ralphretort', 'sam hyde',
-        'dramatica'
+        'dramatica', 'kiwifarms', 'kiwi farms'
     ]
   end
 
