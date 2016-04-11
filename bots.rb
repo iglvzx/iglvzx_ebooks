@@ -142,19 +142,8 @@ class CloneBot < Ebooks::Bot
     delay do
       if very_interesting
         favorite(tweet) if rand < 0.5
-        retweet(tweet) if rand < 0.1
-        if rand < 0.01
-          userinfo(tweet.user.screen_name).pesters_left -= 1
-          load_model!
-          reply(tweet, model.make_response(meta(tweet).mentionless, meta(tweet).limit))
-        end
       elsif interesting
         favorite(tweet) if rand < 0.05
-        if rand < 0.001
-          userinfo(tweet.user.screen_name).pesters_left -= 1
-          load_model!
-          reply(tweet, model.make_response(meta(tweet).mentionless, meta(tweet).limit))
-        end
       end
     end
   end
