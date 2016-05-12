@@ -1,5 +1,23 @@
 {
   "dependencies": {
     "node-schedule": ">=1.0.0"
-  }
+  },
+  "name": "iglvzx_ebooks",
+  "description": "Twitter markov chain bot, @iglvzx_ebooks",
+  "version": "1.0.0",
+  "main": "update.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iglvzx/iglvzx_ebooks.git"
+  },
+  "author": "iglvzx",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/iglvzx/iglvzx_ebooks/issues"
+  },
+  "homepage": "https://github.com/iglvzx/iglvzx_ebooks#readme"
 }
