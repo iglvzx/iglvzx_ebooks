@@ -31,12 +31,13 @@ class CloneBot < Ebooks::Bot
     @word_blacklist = [
         'rape', 'rapes', 'raped', 'raping', 'rapist', 'rapists',
         'pedo', 'pedos', 'pedophile', 'pedophiles', 'paedo', 'paedos', 'paedophile', 'paedophiles',
-        'child porn', 'child pornography', 'molest', 'molests'
+        'child porn', 'child pornography', 'molest', 'molests',
+        'retard'
     ]
 
     @reply_blacklist = [
         'gamergate', 'stopgamergate', '8chan', 'terf', 'tfyc', 'the fine young capitalists',
-        'yiannopoulos', 'zoe quinn', 'brianna wu', 'ethan ralph', 'ralphretort', 'sam hyde', 'candace owens',
+        'yiannopoulos', 'zoe quinn', 'brianna wu', 'ethan ralph', 'ralphretort', 'sam hyde', 'candace owens', 'cernovich',
         'dramatica', 'kiwifarms', 'kiwi farms',
         'allyzone', 'ally zone', 'tankie', 'stalinist',
         'socialautopsy', 'social autopsy'
