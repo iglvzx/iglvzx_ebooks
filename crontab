@@ -1,2 +1,2 @@
 SHELL=/bin/bash
-@reboot $HOME/ebooks/start.sh
+@reboot $HOME/iglvzx_ebooks/start.sh
