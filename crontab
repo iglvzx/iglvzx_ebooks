@@ -1,2 +1,3 @@
 SHELL=/bin/bash
 @reboot $HOME/iglvzx_ebooks/start.sh
+19,39,59 * * * * $HOME/iglvzx_ebooks/update.sh

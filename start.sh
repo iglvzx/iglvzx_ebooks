@@ -13,18 +13,6 @@ ebooks start
 
 echo ""
 
-echo "Checking for existing izzybotupdate screen."
-screen -S izzybotupdate -X quit || true; sleep 1;
-echo "Starting izzybotupdate screen."
-screen -d -m -S izzybotupdate; sleep 1;
-echo "Sending commands to izzybotupdate screen."
-screen -S izzybotupdate -X stuff ". ~/.profile
-cd ~/iglvzx_ebooks/
-nodejs update.js
-"; sleep 1;
-
-echo ""
-
 echo "Checking for existing izzybotyoyo screen."
 screen -S izzybotyoyo -X quit || true; sleep 1;
 echo "Starting izzybotyoyo screen."
