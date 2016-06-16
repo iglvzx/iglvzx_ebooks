@@ -22,7 +22,16 @@ class CloneBot < Ebooks::Bot
   def configure
     # Configuration for all CloneBots
     self.blacklist = [
-        'kylelehk', 'friedrichsays', 'Sudieofna', 'tnietzschequote', 'NerdsOnPeriod', 'FSR', 'BafflingQuotes', 'Obey_Nxme', 'raphisblackbot'
+        'kylelehk',
+        'friedrichsays',
+        'Sudieofna',
+        'tnietzschequote',
+        'NerdsOnPeriod',
+        'FSR',
+        'BafflingQuotes',
+        'Obey_Nxme',
+        'raphisblackbot',
+        'yayfrens'
     ]
 
     self.delay_range = 1..6
@@ -32,7 +41,7 @@ class CloneBot < Ebooks::Bot
         'rape', 'rapes', 'raped', 'raping', 'rapist', 'rapists',
         'pedo', 'pedos', 'pedophile', 'pedophiles', 'paedo', 'paedos', 'paedophile', 'paedophiles',
         'child porn', 'child pornography', 'molest', 'molests',
-        'retard'
+        'retard', 'nigga'
     ]
 
     @reply_blacklist = [
